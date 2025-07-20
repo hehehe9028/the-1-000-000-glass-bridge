@@ -1,0 +1,172 @@
+--[[ 
+🔥 HOKALAZA HUB GUI with Key System 🔥
+Key: "crazy bridge"
+Discord Invite: https://discord.gg/4myWDtW8yj
+--]]
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UIS = game:GetService("UserInputService")
+
+-- Create ScreenGui
+local gui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
+gui.Name = "HOKALAZA"
+gui.ResetOnSpawn = false
+
+-- === KEY SYSTEM UI ===
+local keyFrame = Instance.new("Frame", gui)
+keyFrame.Size = UDim2.new(0, 350, 0, 200)
+keyFrame.Position = UDim2.new(0.5, -175, 0.5, -100)
+keyFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+keyFrame.BorderSizePixel = 0
+Instance.new("UICorner", keyFrame).CornerRadius = UDim.new(0, 10)
+
+local keyTitle = Instance.new("TextLabel", keyFrame)
+keyTitle.Size = UDim2.new(1, 0, 0, 40)
+keyTitle.Position = UDim2.new(0, 0, 0, 0)
+keyTitle.Text = "🔑 Enter Your Key"
+keyTitle.TextColor3 = Color3.fromRGB(0, 170, 255)
+keyTitle.Font = Enum.Font.GothamBold
+keyTitle.TextSize = 20
+keyTitle.BackgroundTransparency = 1
+
+local keyBox = Instance.new("TextBox", keyFrame)
+keyBox.Size = UDim2.new(0, 300, 0, 40)
+keyBox.Position = UDim2.new(0.5, -150, 0, 50)
+keyBox.PlaceholderText = "Enter Key Here"
+keyBox.Text = ""
+keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+keyBox.Font = Enum.Font.GothamBold
+keyBox.TextSize = 14
+Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
+
+-- Submit Button
+local submitBtn = Instance.new("TextButton", keyFrame)
+submitBtn.Size = UDim2.new(0, 130, 0, 35)
+submitBtn.Position = UDim2.new(0, 20, 0, 110)
+submitBtn.Text = "✅ Submit"
+submitBtn.BackgroundColor3 = Color3.fromRGB(40, 100, 40)
+submitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+submitBtn.Font = Enum.Font.GothamBold
+submitBtn.TextSize = 14
+Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 6)
+
+-- Get Key Button
+local getKeyBtn = Instance.new("TextButton", keyFrame)
+getKeyBtn.Size = UDim2.new(0, 130, 0, 35)
+getKeyBtn.Position = UDim2.new(1, -150, 0, 110)
+getKeyBtn.Text = "📋 Get Key"
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 120)
+getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyBtn.Font = Enum.Font.GothamBold
+getKeyBtn.TextSize = 14
+Instance.new("UICorner", getKeyBtn).CornerRadius = UDim.new(0, 6)
+
+getKeyBtn.MouseButton1Click:Connect(function()
+    setclipboard("https://discord.gg/4myWDtW8yj")
+end)
+
+submitBtn.MouseButton1Click:Connect(function()
+    if keyBox.Text == "crazy bridge" then
+        keyFrame.Visible = false
+        loadMainGUI()
+    else
+        keyBox.Text = ""
+        keyBox.PlaceholderText = "❌ Wrong Key!"
+    end
+end)
+
+-- === MAIN GUI FUNCTION ===
+function loadMainGUI()
+    local main = Instance.new("Frame", gui)
+    main.Size = UDim2.new(0, 420, 0, 300)
+    main.Position = UDim2.new(0.3, 0, 0.3, 0)
+    main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    main.BorderSizePixel = 0
+    main.AnchorPoint = Vector2.new(0.5, 0.5)
+    main.Active = true
+    main.Draggable = true
+    main.ClipsDescendants = true
+    Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12)
+
+    local title = Instance.new("TextLabel", main)
+    title.Size = UDim2.new(1, 0, 0, 40)
+    title.Text = "🔥 HOKALAZA HUB 🔥"
+    title.TextColor3 = Color3.fromRGB(0, 170, 255)
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 22
+    title.BackgroundTransparency = 1
+
+    local tabFrame = Instance.new("Frame", main)
+    tabFrame.Size = UDim2.new(1, -20, 0, 220)
+    tabFrame.Position = UDim2.new(0, 10, 0, 60)
+    tabFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    tabFrame.BorderSizePixel = 0
+    Instance.new("UICorner", tabFrame).CornerRadius = UDim.new(0, 10)
+
+    local infMoneyBtn = Instance.new("TextButton", tabFrame)
+    infMoneyBtn.Size = UDim2.new(0, 380, 0, 40)
+    infMoneyBtn.Position = UDim2.new(0.5, -190, 0, 10)
+    infMoneyBtn.Text = "💸 Get Infinite Money"
+    infMoneyBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    infMoneyBtn.TextColor3 = Color3.fromRGB(0, 255, 100)
+    infMoneyBtn.Font = Enum.Font.GothamBold
+    infMoneyBtn.TextSize = 16
+    Instance.new("UICorner", infMoneyBtn).CornerRadius = UDim.new(0, 8)
+
+    infMoneyBtn.MouseButton1Click:Connect(function()
+        local args = { "100000000000000000" }
+        ReplicatedStorage:WaitForChild("CratesUtilities"):WaitForChild("Remotes"):WaitForChild("GiveReward"):FireServer(unpack(args))
+    end)
+
+    local infJump = Instance.new("TextButton", tabFrame)
+    infJump.Size = UDim2.new(0, 180, 0, 40)
+    infJump.Position = UDim2.new(0, 10, 0, 60)
+    infJump.Text = "🦘 Infinite Jump: OFF"
+    infJump.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    infJump.TextColor3 = Color3.fromRGB(255, 255, 255)
+    infJump.Font = Enum.Font.GothamBold
+    infJump.TextSize = 14
+    Instance.new("UICorner", infJump).CornerRadius = UDim.new(0, 8)
+
+    local infJumpEnabled = false
+    infJump.MouseButton1Click:Connect(function()
+        infJumpEnabled = not infJumpEnabled
+        infJump.Text = "🦘 Infinite Jump: " .. (infJumpEnabled and "ON" or "OFF")
+    end)
+
+    UIS.JumpRequest:Connect(function()
+        if infJumpEnabled then
+            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+        end
+    end)
+
+    local speedLabel = Instance.new("TextLabel", tabFrame)
+    speedLabel.Position = UDim2.new(0, 10, 0, 110)
+    speedLabel.Size = UDim2.new(0, 180, 0, 30)
+    speedLabel.Text = "⚡ Speed: 16"
+    speedLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+    speedLabel.BackgroundTransparency = 1
+    speedLabel.Font = Enum.Font.GothamBold
+    speedLabel.TextSize = 14
+
+    local speedBox = Instance.new("TextBox", tabFrame)
+    speedBox.Size = UDim2.new(0, 120, 0, 35)
+    speedBox.Position = UDim2.new(0, 10, 0, 140)
+    speedBox.Text = "16"
+    speedBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    speedBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    speedBox.Font = Enum.Font.GothamBold
+    speedBox.TextSize = 14
+    Instance.new("UICorner", speedBox).CornerRadius = UDim.new(0, 6)
+
+    speedBox.FocusLost:Connect(function()
+        local value = tonumber(speedBox.Text)
+        if value then
+            LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = value
+            speedLabel.Text = "⚡ Speed: " .. tostring(value)
+        end
+    end)
+end
